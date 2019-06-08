@@ -1,4 +1,4 @@
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Implement the Breadth First Search Algorithm for a Graph
@@ -18,6 +18,25 @@ import java.util.Objects;
  * cherry ==> True
  */
 public class ImplementBFS {
+    public boolean breadthFirstSearchIterative(Node rootNode, String data) {
+        Set<Node> visited = new HashSet<>();
+        Queue<Node> nodes = new ArrayDeque<>();
+        nodes.add(rootNode);
+        while (!nodes.isEmpty()) {
+            Node dequeue = nodes.poll();
+            if (dequeue == null || visited.contains(dequeue)) {
+                continue;
+            }
+
+            if (data.equals(dequeue.data)) {
+                return true;
+            }
+
+            visited.add(dequeue);
+            nodes.addAll(dequeue.adjacentNodes);
+        }
+        return false;
+    }
 
     public boolean breadthFirstSearch(Node rootNode, String data) {
         if (rootNode == null || rootNode.visited) {
@@ -29,10 +48,11 @@ public class ImplementBFS {
         }
 
         rootNode.visited = true;
-        boolean toReturn = false;
         for (Node node : rootNode.adjacentNodes) {
-            toReturn |= breadthFirstSearch(node, data);
+            if (breadthFirstSearch(node, data)) {
+                return true;
+            }
         }
-        return toReturn;
+        return false;
     }
 }
