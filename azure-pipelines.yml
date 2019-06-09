@@ -21,6 +21,21 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'build'
+    codeCoverageToolOption: 'codeCoverageToolOption' # Optional. Options: none, cobertura, jaCoCo
+    codeCoverageClassFilesDirectories: 'build/classes/main/' # Required when codeCoverageToolOption == False
+    sonarQubeRunAnalysis:  true
+    sqGradlePluginVersionChoice: 'specify' # Required when sonarQubeRunAnalysis == True# Options: specify, build
+    sonarQubeGradlePluginVersion: '2.6.1' # Required when sonarQubeRunAnalysis == True && SqGradlePluginVersionChoice == Specify
+    checkStyleRunAnalysis: true # Optional
+    findBugsRunAnalysis: true # Optional
+    pmdRunAnalysis: true # Optional
+    #codeCoverageClassFilter: # Optional
+    #codeCoverageFailIfEmpty: false # Optional
+    #javaHomeOption: 'JDKVersion' # Options: jDKVersion, path
+    #jdkVersionOption: 'default' # Optional. Options: default, 1.11, 1.10, 1.9, 1.8, 1.7, 1.6
+    #jdkDirectory: # Required when javaHomeOption == Path
+    #jdkArchitectureOption: 'x64' # Optional. Options: x86, x64
+    #gradleOptions: '-Xmx1024m' # Optional
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
